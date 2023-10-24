@@ -9,7 +9,7 @@ Feature: Plan code Testing
       When method post
       Then status 200
       And print response
-      * def validToken = "Bearer " + response.token
+      * def ValidToken = "Bearer " + response.token
       Given path "/api/plans/get-all-plan-code"
       And header Authorization = ValidToken
       When method get

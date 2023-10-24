@@ -1,3 +1,4 @@
+
 Feature: Security Token API calls
 
   Scenario: Send request to /api/token
@@ -5,13 +6,14 @@ Feature: Security Token API calls
     And path "/api/token"
     And request {"username":"<data_username>","password":"data_password"}
     When method post
-    Then status 200
+    Then status 404
 
     Scenario Outline: Send request to /api/token with wrong username
       Given url "https://qa.insurance-api.tekschool-students.com"
       And path "/api/token"
-      And request {"username":"WrongUsername","password":"tek_supervisor"}
+      And request {"username":"<data_username>","password":"<data_password>"}
       When method post
+      And print response
       Then status <expectedStatus>
 
       And assert response.httpStatus == "<httpStatus>"

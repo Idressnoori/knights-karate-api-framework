@@ -39,3 +39,25 @@ Feature: Create Account Testing
     And assert response.message == "Account Successfully deleted"
 
 
+Scenario: Create account with existing email /api/accounts/add-primary-account validate response
+  Given url "https://qa.insurance-api.tekschool-students.com"
+  Given path "/api/accounts/add-primary-account"
+  Given request
+  """
+    {
+    "id": 0,
+    "email": "idressnoori@yahoo.com",
+    "firstName": "Idress",
+    "lastName": "Noori",
+    "title": "Mr.",
+    "gender": "MALE",
+    "maritalStatus": "MARRIED",
+    "employmentStatus": "Student",
+    "dateOfBirth": "2023-10-18",
+    "new": true
+  }
+    """
+  When method post
+  Then status 400
+  And print response
+  And assert response.errorMessage == "Account with email idressnoori@yahoo.com is exist"
